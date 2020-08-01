@@ -54,8 +54,24 @@ public class Arbol {
             eliminar(raiz.getDerecha(),nodo);
         }
 	
+	private boolean padreHijo(Nodo primer_nodo, Nodo segundo_nodo) {
+		boolean log = false;
+		if (primer_nodo.getDerecha()==segundo_nodo) {
+			log = true;
+		}else if(primer_nodo.getIzquierda()==segundo_nodo) {
+			log = true;
+		}else if(segundo_nodo.getDerecha()==primer_nodo) {
+			log = true;
+		}else if(segundo_nodo.getIzquierda()==primer_nodo) {
+			log = true;
+		}else if (primer_nodo.getPadre()==segundo_nodo.getPadre()) {
+			log = true;
+		}
+		return log;
+	}
+	
 	public void suma(Nodo primer_nodo, Nodo segundo_nodo) {
-		if (primer_nodo.getValor() == segundo_nodo.getValor()) {
+		if ((primer_nodo.getValor() == segundo_nodo.getValor())&&(padreHijo(primer_nodo,segundo_nodo))) {
 			segundo_nodo.setValor(segundo_nodo.getValor()*2);
 			eliminar(raiz,primer_nodo);
 		}
