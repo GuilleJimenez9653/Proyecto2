@@ -21,7 +21,7 @@ public class Nodo {
 		this.llave = indice;
 		this.derecha = null;
 		this.izquierda = null;
-		this.valor = 2;
+		//this.valor = 2;
 	}
 	
 	/**
