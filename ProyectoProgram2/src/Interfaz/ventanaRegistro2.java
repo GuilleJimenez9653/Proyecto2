@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import archivos.manejoDeArchivos;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Frame;
@@ -18,6 +21,7 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class ventanaRegistro2 extends JFrame {
 	
@@ -29,8 +33,8 @@ public class ventanaRegistro2 extends JFrame {
 		
 		return log;
 	}
-
-	private JPanel contentPane;
+		
+	private fondoVentanas contentPane;
 	private JTextField textFieldNombres;
 	private JTextField textFieldApellidos;
 	private JTextField textFieldNombreDeUsuario;
@@ -39,130 +43,116 @@ public class ventanaRegistro2 extends JFrame {
 	private JTextField textFieldConfirmarContraseña;
 
 	public ventanaRegistro2(Frame padre) {
+		setTitle("2048 Fake - REGISTRO");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 633, 500);
-		contentPane = new JPanel();
+		contentPane = new fondoVentanas("/imagenes/fondoRegistro.png");
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setLocationRelativeTo(null);
-		
-		JLabel lblNombres = new JLabel("Nombres:");
-		lblNombres.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNombres.setBounds(192, 59, 56, 25);
-		contentPane.add(lblNombres);
+		setResizable(false);
 		
 		textFieldNombres = new JTextField();
-		textFieldNombres.setBounds(258, 53, 120, 31);
+		textFieldNombres.setBounds(285, 69, 140, 31);
 		contentPane.add(textFieldNombres);
 		textFieldNombres.setColumns(10);
 		
-		JLabel lblApellidos = new JLabel("Apellidos:");
-		lblApellidos.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblApellidos.setBounds(192, 101, 56, 25);
-		contentPane.add(lblApellidos);
-		
 		textFieldApellidos = new JTextField();
 		textFieldApellidos.setColumns(10);
-		textFieldApellidos.setBounds(258, 95, 120, 31);
+		textFieldApellidos.setBounds(285, 113, 140, 31);
 		contentPane.add(textFieldApellidos);
-		
-		JLabel lblNombreDeUsuario = new JLabel("Nombre de Usuario:");
-		lblNombreDeUsuario.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNombreDeUsuario.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNombreDeUsuario.setBounds(128, 143, 120, 25);
-		contentPane.add(lblNombreDeUsuario);
 		
 		textFieldNombreDeUsuario = new JTextField();
 		textFieldNombreDeUsuario.setColumns(10);
-		textFieldNombreDeUsuario.setBounds(258, 137, 120, 31);
+		textFieldNombreDeUsuario.setBounds(285, 158, 140, 31);
 		contentPane.add(textFieldNombreDeUsuario);
-		
-		JLabel lblCorreoElectronico = new JLabel("Correo Electronico:");
-		lblCorreoElectronico.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblCorreoElectronico.setBounds(138, 185, 110, 25);
-		contentPane.add(lblCorreoElectronico);
 		
 		textFieldCorreoElectronico = new JTextField();
 		textFieldCorreoElectronico.setColumns(10);
-		textFieldCorreoElectronico.setBounds(258, 179, 120, 31);
+		textFieldCorreoElectronico.setBounds(285, 203, 140, 31);
 		contentPane.add(textFieldCorreoElectronico);
-		
-		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
-		lblContrasea.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblContrasea.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblContrasea.setBounds(148, 227, 100, 25);
-		contentPane.add(lblContrasea);
 		
 		textFieldContraseña = new JTextField();
 		textFieldContraseña.setColumns(10);
-		textFieldContraseña.setBounds(258, 221, 120, 31);
+		textFieldContraseña.setBounds(285, 248, 140, 31);
 		contentPane.add(textFieldContraseña);
-		
-		JLabel lblConfirmarContrasea = new JLabel("Confirmar Contrase\u00F1a:");
-		lblConfirmarContrasea.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblConfirmarContrasea.setBounds(117, 269, 131, 25);
-		contentPane.add(lblConfirmarContrasea);
 		
 		textFieldConfirmarContraseña = new JTextField();
 		textFieldConfirmarContraseña.setColumns(10);
-		textFieldConfirmarContraseña.setBounds(258, 263, 120, 31);
+		textFieldConfirmarContraseña.setBounds(285, 293, 140, 31);
 		contentPane.add(textFieldConfirmarContraseña);
 		
 		JLabel lblErrorContraseña = new JLabel("Error, las contrase\u00F1as no coinciden.");
-		lblErrorContraseña.setEnabled(false);
+		lblErrorContraseña.setVisible(false);
+		lblErrorContraseña.setIcon(new ImageIcon(ventanaRegistro2.class.getResource("/imagenes/errorUno.png")));
 		lblErrorContraseña.setForeground(Color.RED);
 		lblErrorContraseña.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblErrorContraseña.setBounds(257, 305, 205, 14);
+		lblErrorContraseña.setBounds(268, 335, 293, 23);
 		contentPane.add(lblErrorContraseña);
 		
 		JLabel lblDebeLlenarTodos = new JLabel("Debe llenar todos los requerimientos.");
-		lblDebeLlenarTodos.setEnabled(false);
-		lblDebeLlenarTodos.setForeground(Color.RED);
+		lblDebeLlenarTodos.setIcon(new ImageIcon(ventanaRegistro2.class.getResource("/imagenes/errorDos.png")));
+		lblDebeLlenarTodos.setVisible(false);
+		lblDebeLlenarTodos.setForeground(Color.WHITE);
 		lblDebeLlenarTodos.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblDebeLlenarTodos.setBounds(248, 321, 214, 14);
+		lblDebeLlenarTodos.setBounds(248, 360, 359, 23);
 		contentPane.add(lblDebeLlenarTodos);
 		
-		JButton btnRegresar = new JButton("Regresar");
+		JButton btnRegresar = new JButton("");
+		btnRegresar.setIcon(new ImageIcon(ventanaRegistro2.class.getResource("/imagenes/regresar.png")));
 		btnRegresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
 				padre.setVisible(true);
 			}
 		});
-		btnRegresar.setBounds(518, 427, 89, 23);
+		btnRegresar.setBounds(482, 427, 125, 25);
 		contentPane.add(btnRegresar);
 		
-		JButton btnSiguiente = new JButton("Siguiente");
+		JButton btnSiguiente = new JButton("");
+		btnSiguiente.setIcon(new ImageIcon(ventanaRegistro2.class.getResource("/imagenes/siguiente.png")));
 		btnSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {			
 				boolean log = comprobarRegistro();
 				boolean logLlenar = false;
 				boolean logPass = false;
+				String texto;
 				if (log == false)
-					lblDebeLlenarTodos.setEnabled(true);
+					lblDebeLlenarTodos.setVisible(true);
 				else{
-					lblDebeLlenarTodos.setEnabled(false);
+					lblDebeLlenarTodos.setVisible(false);
 					logLlenar = true;
 				}
 				
 				if (!textFieldContraseña.getText().equals(textFieldConfirmarContraseña.getText())){
-					lblErrorContraseña.setEnabled(true);
-					textFieldContraseña.setText("");
-					textFieldConfirmarContraseña.setText("");
+					lblErrorContraseña.setVisible(true);
+					textFieldContraseña.setText(null);
+					textFieldConfirmarContraseña.setText(null);
 				}	
 				else{
 					logPass = true;
-					lblErrorContraseña.setEnabled(false);
+					lblErrorContraseña.setVisible(false);
 				}
 				
-				if ((logPass) && (logLlenar)){
-					System.out.print("Entro");
+				if ((logPass) && (!logLlenar)){							
+					lblDebeLlenarTodos.setBounds(248, 335, 359, 23);
+				}
+				else
+					lblDebeLlenarTodos.setBounds(248, 360, 359, 23);
+				
+				if ((logPass) && (logLlenar)){				//EN CASO DE QUE ESTE TODO BIEN, PROCEDE A GUARDAR TODO EN UN ARCHIVO.
+					manejoDeArchivos archivo = new manejoDeArchivos(textFieldNombres.getText());
+					archivo = new manejoDeArchivos(textFieldApellidos.getText());
+					archivo = new manejoDeArchivos(textFieldNombreDeUsuario.getText());
+					archivo = new manejoDeArchivos(textFieldCorreoElectronico.getText());
+					archivo = new manejoDeArchivos(textFieldContraseña.getText());
+					archivo = new manejoDeArchivos(textFieldConfirmarContraseña.getText());				
 				}
 			}
 		}
 		);
-		btnSiguiente.setBounds(419, 427, 89, 23);
+		btnSiguiente.setBounds(347, 427, 125, 25);
 		contentPane.add(btnSiguiente);
 		setVisible(true);
 	
