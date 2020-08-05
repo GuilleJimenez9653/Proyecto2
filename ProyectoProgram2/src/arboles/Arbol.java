@@ -2,6 +2,7 @@ package arboles;
 
 public class Arbol {
 	Nodo raiz;
+	
 	public Arbol() {
 		raiz = null;
 	}
