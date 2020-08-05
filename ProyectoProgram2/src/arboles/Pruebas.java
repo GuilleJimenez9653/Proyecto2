@@ -11,7 +11,9 @@ public class Pruebas {
 			try {
 				opcion = Integer.parseInt(JOptionPane.showInputDialog(null,
 						"1. Agregar un Nodo\n"
-						+ "2. Salir\n"
+						+ "2. Recorrer\n"
+						+"3."
+						+ "4. Salir\n"
 								+"Elige una opcion...","Arboles Binarios",
 								JOptionPane.QUESTION_MESSAGE));
 				switch (opcion) {
@@ -25,6 +27,18 @@ public class Pruebas {
 						arbol.agregarNodo(elemento,valor);
 						break;
 					case 2:
+						if(!arbol.esVacio()) {
+							System.out.println("inOrden");
+							arbol.inOrden(arbol.raiz);
+							System.out.println("preOrden");
+							arbol.preOrden(arbol.raiz);
+							System.out.println("postOrden");
+							arbol.postOrden(arbol.raiz);
+						}
+						break;
+					case 3:
+						break;
+					case 4:
 						JOptionPane.showMessageDialog(null,"Aplicacion finalizada","Fin",JOptionPane.INFORMATION_MESSAGE);
 						break;
 					default:
@@ -33,7 +47,7 @@ public class Pruebas {
 			}catch(NumberFormatException n) {
 				JOptionPane.showMessageDialog(null,"Error"+ n.getMessage());
 			}
-		}while (opcion != 2);
+		}while (opcion != 4);
 	}
 
 }
