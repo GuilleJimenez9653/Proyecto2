@@ -61,6 +61,11 @@ public class Arbol {
 		}
 	}
 	
+	/**
+	 * Elimina un nodo del arbol, devuelve true si elimino correctamente y false si hubo un error
+	 * @param d resive como parametro el numero del nodo
+	 * @return true si elimino correctamente y false si hubo error
+	 */
 	public boolean eliminar(int d) {
 		Nodo aux = raiz;
 		Nodo padre = raiz;
@@ -133,4 +138,49 @@ public class Arbol {
 		return reemplazo;
 	}
 	
+	private boolean comprobarRelacion(Nodo nodoUno,Nodo nodoDos) {
+		boolean log = false;
+		Nodo padre = encontrarPadre(raiz,nodoUno);
+		if (nodoUno == nodoDos.getHjoDerecho()||nodoUno == nodoDos.getHijoIzquierdo()) {
+			log = true;
+		}else if(nodoDos == nodoUno.getHjoDerecho() || nodoDos == nodoUno.getHijoIzquierdo()) {
+			log = true;
+		}else if(padre.getHijoIzquierdo() == nodoDos || padre.getHjoDerecho() == nodoDos) {
+			log = true;
+		}
+		
+		return log;
+	}
+	
+	private Nodo encontrarPadre(Nodo nodo,Nodo nodoHijo) {
+		Nodo padre = nodo;
+		if(nodo != null) {
+			if(padre.getHijoIzquierdo() == nodoHijo || padre.getHjoDerecho() == nodoHijo) {
+				return padre;
+			}
+			encontrarPadre(nodo.getHijoIzquierdo(),nodoHijo);
+			encontrarPadre(nodo.getHjoDerecho(),nodoHijo);
+		}
+		return padre;
+	}
+	
+	public void suma(Nodo nodoUno,Nodo nodoDos) {
+		if (comprobarRelacion(nodoUno,nodoDos)) {
+			if(nodoUno.getValor() == nodoDos.getValor()) {
+				//nodoDos es el padre
+				if(nodoUno == nodoDos.getHjoDerecho()||nodoUno == nodoDos.getHijoIzquierdo()) {
+					nodoDos.setValor(nodoDos.getValor() + nodoUno.getValor());
+					eliminar(nodoUno.getDato());
+				}else if(nodoDos == nodoUno.getHjoDerecho() || nodoDos == nodoUno.getHijoIzquierdo()) {
+					//nodoUno es el padre
+					nodoUno.setValor(nodoUno.getValor() + nodoDos.getValor());
+					eliminar(nodoDos.getDato());
+				}else {
+					//son hermanos
+					nodoDos.setValor(nodoDos.getValor() + nodoUno.getValor());
+					eliminar(nodoUno.getDato());
+				}
+			}
+		}
+	}
 }

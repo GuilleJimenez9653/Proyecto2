@@ -7,6 +7,11 @@ public class Nodo {
 	
 	public Nodo () {}
 	
+	/**
+	 * Constructor con parametros de la clase nodo
+	 * @param dato es la clave del nodo
+	 * @param valor es la cantidad que posee el nodo
+	 */
 	public Nodo(int dato,int valor) {
 		this.dato = dato;
 		this.valor = valor;
@@ -45,5 +50,6 @@ public class Nodo {
 	public void setHjoDerecho(Nodo hjoDerecho) {
 		this.hjoDerecho = hjoDerecho;
 	}
+
 	
 }
